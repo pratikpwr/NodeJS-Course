@@ -20,6 +20,8 @@ const copiedHobbies = [...hobbies];
 console.log(copiedHobbies);
 
 // rest operator
+// can pass any number of arguments
+
 const toArray = (...args) => {
   return args;
 };
