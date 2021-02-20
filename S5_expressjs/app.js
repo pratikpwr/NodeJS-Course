@@ -4,16 +4,18 @@ const express = require("express");
 
 const app = express();
 
-app.use((req, res, next)=>{
+app.use('/add-product',(req, res, next)=>{
 
     console.log("In the middleware!");
-    next();// allows the request to continue to next middleware in line
+    res.send('<h>Add Product Here!</h>');
+    
+    // next();// allows the request to continue to next middleware in line
 });
 
-app.use((req, res, next)=>{
+app.use('/',(req, res, next)=>{
 
     console.log("In the another middleware!");
-    res.send('<h>This is Express JS</h>');
+    res.send('<h>Home Page</h>');
 });
 
 // const server = http.createServer(app);
