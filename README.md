@@ -5,4 +5,6 @@
 by [Maximilian Schwarzmüller](https://www.linkedin.com/in/maximilian-schwarzm%C3%BCller-66b152a5/)
 
 # What I Learned
-
+- How NodeJS Works
+- debugging and easy development in NodeJS
+- ExpressJS
