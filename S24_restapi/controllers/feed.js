@@ -5,6 +5,18 @@ const path = require("path");
 const Post = require("../models/post");
 const User = require("../models/user");
 
+exports.getStatus = (req, res, next) => {
+  const userId = req.userId;
+
+  User.findById(userId)
+    .then((user) => {
+      res.status(200).json({ message: "Success", status: user.status });
+    })
+    .catch((err) => {
+      catchError({ next: next, error: err });
+    });
+};
+
 exports.getAllPosts = (req, res, next) => {
   const currentPage = req.query.page || 1;
   const perPage = 3;
@@ -201,7 +213,7 @@ exports.deletePost = (req, res, next) => {
     })
     .then((result) => {
       return User.findById(currentUserId);
-    })  
+    })
     .then((user) => {
       user.posts.pull(postId);
       return user.save();
