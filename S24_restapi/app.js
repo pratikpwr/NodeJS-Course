@@ -5,6 +5,7 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 
 const feedRoutes = require("./routes/feed");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 
@@ -15,7 +16,10 @@ const fileStorage = multer.diskStorage({
     cb(null, "images");
   },
   filename: (req, file, cb) => {
-    cb(null, `${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}`);
+    cb(
+      null,
+      `${new Date().toISOString().replace(/:/g, "-")}-${file.originalname}`
+    );
   },
 });
 
@@ -49,14 +53,15 @@ app.use(
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/posts", feedRoutes);
+app.use("/auth", authRoutes);
 
 // general middleware function to handle errors
 app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
-
-  res.status(status).json({ message: message });
+  const data = error.data;
+  res.status(status).json({ status: status, message: message, data: data });
 });
 
 // connect to mongoose db cloud

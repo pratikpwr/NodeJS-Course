@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const User = require("../models/user");
+
 const Schema = mongoose.Schema;
 
 const postSchema = Schema(
@@ -15,8 +17,13 @@ const postSchema = Schema(
       type: String,
       required: true,
     },
+    creatorId:{
+      type: String,
+      required:true,
+    },
     creator: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
